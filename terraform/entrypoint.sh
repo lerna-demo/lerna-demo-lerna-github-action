@@ -2,6 +2,11 @@
 
 set -e
 WORKDIR=$1
-TF_ARG=$2
+TF_WORKSPACE=$2
+
 cd $WORKDIR
-sh -c "terraform $TF_ARG"
+terraform init
+terraform validate
+terraform workspace new $TF_WORKSPACE
+terraform workspace select $TF_WORKSPACE
+terraform apply -auto-approve
