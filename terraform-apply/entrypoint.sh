@@ -7,6 +7,5 @@ TF_WORKSPACE=$2
 cd $WORKDIR
 terraform init
 terraform validate
-terraform workspace new $TF_WORKSPACE
-terraform workspace select $TF_WORKSPACE
+terraform workspace select -or-create $TF_WORKSPACE
 terraform apply -auto-approve
