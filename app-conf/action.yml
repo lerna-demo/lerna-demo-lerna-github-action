@@ -1,0 +1,16 @@
+name: 'Application config'
+description: 'Fetch environment specific application config'
+inputs:
+  git-branch:  
+    description: 'Git branch'
+    required: true
+outputs:
+  kube-env: # id of output
+    description: 'Kubernetes environment'
+  kube-config-data-key: # id of output
+    description: 'SSM parameter key for Kube config data'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.git-branch }}

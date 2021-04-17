@@ -1,0 +1,14 @@
+name: 'Get SSM Parameter Value'
+description: 'Get SSM Parameter Value'
+inputs:
+  ssm-parameter-key:  
+    description: 'SSM Parameter Key'
+    required: true
+outputs:
+  ssm-parameter-value: # id of output
+    description: 'SSM Parameter Value'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.ssm-parameter-key }}

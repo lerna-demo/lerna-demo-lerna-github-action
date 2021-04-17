@@ -1,0 +1,15 @@
+name: 'EKS Deployment'
+description: 'Deploying EKS pod'
+inputs:
+  kube-config-data:  
+    description: 'A base64-encoded kubeconfig file with credentials for Kubernetes to access the cluster.'
+    required: true
+  kubectl:  
+    description: 'Kubeclt args'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.kube-config-data }}
+    - ${{ inputs.kubectl }}
