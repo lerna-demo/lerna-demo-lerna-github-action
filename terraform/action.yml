@@ -4,9 +4,12 @@ inputs:
   workdir:  
     description: 'cd Workdir.'
     required: true
+  workspace:  
+    description: 'Terraform workspace.'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.workdir }}
-    - ${{ inputs.kubectl }}
+    - ${{ inputs.workspace }}
