@@ -1,8 +1,5 @@
 FROM ubuntu:latest
 
-ENV YQ_VERSION="v4.6.3"
-ENV YQ_BINARY="yq_linux_amd64"
-
 RUN apt update
 RUN apt install curl -y
 RUN apt install unzip -y

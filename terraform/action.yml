@@ -1,0 +1,16 @@
+name: 'Terraform Deployment'
+description: 'Deploying Terraform script'
+inputs:
+  workdir:  
+    description: 'cd Workdir.'
+    default: ./
+    required: false
+  terraform:  
+    description: 'Terraform CLI args'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.workdir }}
+    - ${{ inputs.kubectl }}
