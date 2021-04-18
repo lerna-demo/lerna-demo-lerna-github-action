@@ -19,6 +19,10 @@ curl \
     "https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILENAME}/dispatches" \
     --data ${data}
 
+if [ $? -eq 6 ]; then
+    true
+fi
+
 echo "Successfully workflow triggered"
 
 curl \
