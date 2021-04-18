@@ -1,0 +1,27 @@
+name: 'Trigger github workflow'
+description: 'Trigger github workflow and check status'
+inputs:
+  github-token:  
+    description: 'Github token'
+    required: true
+  repository-owner:  
+    description: 'Repository owner'
+    required: true
+  repository-name:  
+    description: 'Repository name'
+    required: true
+  repository-ref:  
+    description: 'Repository branch name'
+    required: true
+  workflow-filename:  
+    description: 'Workflow file name as a string.'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.github-token }}
+    - ${{ inputs.repository-owner }}
+    - ${{ inputs.repository-name }}
+    - ${{ inputs.repository-ref }}
+    - ${{ inputs.workflow-filename }}
