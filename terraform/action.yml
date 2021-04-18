@@ -7,9 +7,13 @@ inputs:
   workspace:  
     description: 'Terraform workspace.'
     required: true
+  terraform:  
+    description: 'Terraform args.'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.workdir }}
     - ${{ inputs.workspace }}
+    - ${{ inputs.terraform }}
