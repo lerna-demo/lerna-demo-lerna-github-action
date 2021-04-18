@@ -49,6 +49,7 @@ while true; do
     JOB_URL=$(jq -r ". | .html_url" $TEMP_FILE)
     STATUS=$(jq -r ". | .status" $TEMP_FILE)
     echo "Checking run state: ${STATUS}"
+    echo "Worklflow run url: ${JOB_URL}"
  
     if [ "$STATUS" = "completed" ]; then
         CONCLUSION=$(jq -r ". | .conclusion" $TEMP_FILE)
@@ -58,7 +59,6 @@ while true; do
  
     sleep $SLEEP_INTERVAL
 done
-
 rm $TEMP_FILE || true
 
 if [ "$CONCLUSION" != "success" ]; then
