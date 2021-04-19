@@ -19,9 +19,12 @@ fi
 DB_STATE=$(aws rds describe-db-instances --db-instance-identifier $DB_NAME --query 'DBInstances[0].DBInstanceStatus' --output text)
 
 if [ $? -eq 0 ]; then
-    if [ "$DB_STATE" == "$DB_DESIRED_STATE" ]; then
+    if [ "$DB_STATE" == "$DB_CURRENT_STATE" ]; then
         echo "Making database $DB_DESIRED_STATE ..."
         aws rds $DB_ACTION-db-instance --db-instance-identifier $DB_NAME
+    else
+        echo "Database need to be in state \"$DB_CURRENT_STATE\" to \"$DB_ACTION\""
+        exit
     fi
 
     while true; do
