@@ -6,10 +6,26 @@ inputs:
     required: true
   kubectl:  
     description: 'Kubeclt args'
-    required: true
+    default: ''
+    required: false
+  check-pod-health:
+    description: 'Pass the app endpoint. eg http://localhost:3000'
+    default: ''
+    required: false
+  app-name:
+    description: 'Application label name. e.g react-app'
+    default: ''
+    required: false
+  app-environment:
+    description: 'Application label name. e.g dev'
+    default: ''
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.kube-config-data }}
     - ${{ inputs.kubectl }}
+    - ${{ inputs.check-pod-health }}
+    - ${{ inputs.app-name }}
+    - ${{ inputs.app-environment }}
