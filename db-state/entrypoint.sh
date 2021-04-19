@@ -13,6 +13,7 @@ elif [ $DB_DESIRED_STATE == "stopped" ]; then
     DB_CURRENT_STATE="available"
 else
     echo "Wrong State chosen. Valid are available or stopped"
+    exit
 fi
 
 DB_STATE=$(aws rds describe-db-instances --db-instance-identifier $DB_NAME --query 'DBInstances[0].DBInstanceStatus' --output text)
