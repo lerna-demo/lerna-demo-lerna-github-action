@@ -1,0 +1,19 @@
+name: 'Database State'
+description: 'Changing database state'
+inputs:
+  database-name:  
+    description: 'Database name'
+    required: true
+  database-desired-state:  
+    description: 'Database desired state'
+    required: true
+  raise-error-if-db-name-not-exists:
+    description: 'RAISE_ERROR_IF_DB_NOT_EXISTS'
+    default: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.database-name }}
+    - ${{ inputs.database-desired-state }}
+    - ${{ inputs.raise-error-if-db-name-not-exists }}
