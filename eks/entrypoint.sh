@@ -18,5 +18,6 @@ elif [ "$APP_HOST" != "" ]; then
         echo "Application is not healthy, HTTP STATUS CODE = \"$HTTP_STATUS\""
         exit 1
     fi
+    echo "Application is healthy, HTTP STATUS CODE = \"$HTTP_STATUS\""
 fi
 
