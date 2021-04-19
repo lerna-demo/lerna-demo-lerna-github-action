@@ -23,6 +23,7 @@ if [ $? -eq 0 ]; then
         echo "Making database $DB_DESIRED_STATE ..."
         aws rds $DB_ACTION-db-instance --db-instance-identifier $DB_NAME
     else
+        echo "Database current state is \"$DB_STATE\" ..."
         echo "Database need to be in state \"$DB_CURRENT_STATE\" to \"$DB_ACTION\""
         exit
     fi
