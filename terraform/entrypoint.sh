@@ -20,7 +20,25 @@ while true; do
         break;
     elif(( $CMD_EXIT_STATUS!=0 && $count>=$RETRY))
     then
-        exit 1
+        # Work around for known issue https://registry.terraform.io/modules/Young-ook/eks/aws/1.4.3#unauthorized
+        [ $(terraform state list) == "module.eks.kubernetes_config_map.aws_auth[0]" ]
+        
+        REMAINING_STATE_COUNT=$(terraform state list | wc -l |  awk '{ print $1 }')
+        if(( $REMAINING_STATE_COUNT==1 ))
+        then
+            REMAINING_STATE=$(terraform state list)
+            echo "Remaining State"
+            echo "$REMAINING_STATE"
+            AWS_AUTH_TF_RESOURCE="module.eks.kubernetes_config_map.aws_auth[0]"
+            if [ "$REMAINING_STATE" == "$AWS_AUTH_TF_RESOURCE" ]; then
+                echo "Deleting \"$AWS_AUTH_TF_RESOURCE\" from TF state"
+                terraform state rm $AWS_AUTH_TF_RESOURCE
+            else
+                exit 1    
+            fi    
+        else
+            exit 1
+        fi
     else
         count=$(($count + 1))
         sleep $SLEEP_INTERVAL
