@@ -7,6 +7,10 @@ inputs:
   workspace:  
     description: 'Terraform workspace.'
     required: true
+  retry:  
+    description: 'Retry count.'
+    required: false
+    default: 3
   terraform:  
     description: 'Terraform args.'
     required: true
@@ -17,3 +21,4 @@ runs:
     - ${{ inputs.workdir }}
     - ${{ inputs.workspace }}
     - ${{ inputs.terraform }}
+    - ${{ inputs.retry }}
