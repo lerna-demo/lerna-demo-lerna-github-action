@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 WORKDIR=$1
 TF_WORKSPACE=$2
 TF_ARGS=$3
