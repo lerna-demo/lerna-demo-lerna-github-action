@@ -14,14 +14,15 @@ terraform workspace select $TF_WORKSPACE || terraform workspace new $TF_WORKSPAC
 count=1
 while true; do
     terraform $TF_ARGS
-    if(( $?==0 ))
+    CMD_EXIT_STATUS=$?
+    if(( $CMD_EXIT_STATUS==0 ))
     then
         break;
-    elif(( $?!=0 && $count>=$RETRY))
+    elif(( $CMD_EXIT_STATUS!=0 && $count>=$RETRY))
     then
         exit 1
     else
-        num=$(($count + 1))
+        count=$(($count + 1))
         sleep $SLEEP_INTERVAL
         echo "Retrying again"
     fi
